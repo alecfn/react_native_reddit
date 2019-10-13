@@ -1,4 +1,4 @@
-package com.redditor;
+package com.redditor_scroller;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,4 +1,4 @@
-package com.redditor;
+package com.redditor_scroller;
 
 import android.app.Application;
 import android.content.Context;
