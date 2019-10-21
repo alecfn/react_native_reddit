@@ -1,102 +1,51 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 
-// TODO eventually this should be refactored
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  FlatList,
-  Button,
-} from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from "react-navigation-stack";
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import MainFeed from './screens/MainFeed';
 
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-
-const App = createAppContainer(MainNavigator);
-
-class HomeScreen extends React.Component {
+class App extends React.Component {
   static navigationOptions = {
-    title: 'Testy test',
+    title: "Home",
+    headerStyle: {
+      backgroundColor: "#373142"
+    },
+    headerTitleStyle: {
+      color: "#FFF"
+    }
   };
+
+  goToMainFeed = () => {
+    this.props.navigation.navigate("MainFeed");
+  };
+
   render() {
-      const {navigate} = this.props.navigation;
-      return (
-        <ScrollView>
-               <Text>Here's some text</Text>
-               <Button title="Go to Main"
-               onPress={() => navigate('Main')}
-               />
-        </ScrollView>
-    );
+    return (
+      <View style={styles.container}>
+        <Text> Yo </Text>
+        <Button
+          onPress={this.goToMainFeed}
+          title="Go to Main Feed"
+        />
+      </View>
+      );
   }
 }
-
-class MainScreen extends React.Component {
-  constructor() {
-
-  }
-}
-
-const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
-  Main: {screen: MainScreen},
-});
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  container: {
+    flex: 1,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
 
-export default App;
+const AppNavigator = createStackNavigator({
+  Home: {screen: App},
+  MainFeed: {screen: MainFeed}
+});
+
+export default createAppContainer(AppNavigator);
