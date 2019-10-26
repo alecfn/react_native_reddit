@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, FlatList, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Image, FlatList, StyleSheet }
+from 'react-native';
 
 export default class MainFeed extends Component {
 
@@ -12,7 +13,7 @@ export default class MainFeed extends Component {
   }
 
   // For now, just grab the front page JSON so it can be put into views.
-  componentDidMount() {
+  componentDidMount() { // todo willMount? await?
     fetch("https://www.reddit.com/.json")
       .then(res => res.json())
       .then(json => {
@@ -21,6 +22,29 @@ export default class MainFeed extends Component {
           homePageArray: json,
         })
       });
+  }
+
+  renderPostRows = (posts) => {
+    return (
+      <View style={styles.container}>
+        <FlatList
+        data={posts}
+        renderItem={({item}) =>(
+          <View>
+          <Text>
+            {item.title}
+          </Text>
+          <Image
+          style={{width: 50, height: 50}}
+          source={{uri: item.thumbnail}}
+          />
+          </View>
+          )}
+          numColumns={2}
+          keyExtractor={(x, i) => i}
+        />
+      </View>
+    );
   }
 
   render() {
@@ -35,13 +59,10 @@ export default class MainFeed extends Component {
       // Put all the post titles in their own array for easy access.
       var posts = [];
       this.state.homePageArray.data.children.forEach(child =>
-        posts.push(child.data.title));
-      console.log(posts)
+        posts.push(child.data));
+      console.log(posts) // todo: posts could be a state prop
       return (
-        <FlatList
-          data={posts}
-      //    renderItem={()}
-        />
+        this.renderPostRows(posts)
       );
     }
   }
