@@ -1,4 +1,3 @@
-
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { createAppContainer } from 'react-navigation';
@@ -17,16 +16,15 @@ class App extends React.Component {
     }
   };
 
-  goToMainFeed = () => {
+  _goToMainFeed = () => {
     this.props.navigation.navigate("MainFeed");
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text> Yo </Text>
         <Button
-          onPress={this.goToMainFeed}
+          onPress={this._goToMainFeed}
           title="Go to Main Feed"
         />
       </View>

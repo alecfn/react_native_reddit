@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, ScrollView, Image, FlatList, StyleSheet }
-from 'react-native';
+import { View, Text, ScrollView, Image, FlatList, StyleSheet,
+         TouchableHighlight } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from "react-navigation-stack";
+
+import PostView from './PostView';
 
 export default class MainFeed extends Component {
 
@@ -24,21 +28,31 @@ export default class MainFeed extends Component {
       });
   }
 
-  renderPostRows = (posts) => {
+  _goToPost(url) {
+    console.log(url)
+    console.log("func called")
+    this.props.navigation.navigate("PostView")
+  }
+
+  renderPostRows(posts) {
     return (
       <View style={styles.container}>
         <FlatList
         data={posts}
         renderItem={({item}) =>(
+          <TouchableHighlight
+          onPress={this._goToPost(item.permalink)}
+          underlayColor="white" >
             <View style={{flexDirection: 'row', alignContext:'stretch'}}>
-              <Text style={styles.postText}>
-                {item.title}
-              </Text>
-              <Image
-              style={{width: 80, height: 80}}
-              source={{uri: item.thumbnail}}
-              />
+                  <Text style={styles.postText}>
+                    {item.title}
+                  </Text>
+                  <Image
+                  style={{width: 80, height: 80}}
+                  source={{uri: item.thumbnail}}
+                  />
             </View>
+          </TouchableHighlight>
           )}
           keyExtractor={(x, i) => i}
         />
