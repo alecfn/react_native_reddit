@@ -30,17 +30,16 @@ export default class MainFeed extends Component {
         <FlatList
         data={posts}
         renderItem={({item}) =>(
-          <View>
-          <Text>
-            {item.title}
-          </Text>
-          <Image
-          style={{width: 50, height: 50}}
-          source={{uri: item.thumbnail}}
-          />
-          </View>
+            <View style={{flexDirection: 'row', alignContext:'stretch'}}>
+              <Text style={styles.postText}>
+                {item.title}
+              </Text>
+              <Image
+              style={{width: 80, height: 80}}
+              source={{uri: item.thumbnail}}
+              />
+            </View>
           )}
-          numColumns={2}
           keyExtractor={(x, i) => i}
         />
       </View>
@@ -48,7 +47,6 @@ export default class MainFeed extends Component {
   }
 
   render() {
-
     // Load these values so we can access them while rendering.
     var { isLoaded, homePageArray } = this.state;
 
@@ -56,7 +54,7 @@ export default class MainFeed extends Component {
       return <Text>Loading... </Text>
     }
     else {
-      // Put all the post titles in their own array for easy access.
+      // Put all the post entries in their own array for easy access.
       var posts = [];
       this.state.homePageArray.data.children.forEach(child =>
         posts.push(child.data));
@@ -78,4 +76,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
+  postText: {
+    paddingLeft: 10,
+    width: 100,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  }
 })
