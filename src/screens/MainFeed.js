@@ -3,6 +3,11 @@ import { View, Text, ScrollView, Image, FlatList, StyleSheet,
          TouchableHighlight } from 'react-native';
 import { commonStyles } from './Styles'
 
+/**
+ * Displays the main feed of the Reddit front page by ingesting the JSON.
+ * 
+ * Currently just gets the most basic form of JSON. WIP.
+ */
 export default class MainFeed extends Component {
 
   constructor(props) {
@@ -24,17 +29,17 @@ export default class MainFeed extends Component {
         })
       });
   }
-
+  
   _goToPost(url) {
-    // Super props
-    const fullUrl = "www.reddit.com" + url
+    // Note this must be https, http fetches are not allowed by default
+    const fullUrl = "https://www.reddit.com" + url
     console.log(fullUrl)
     this.props.navigation.navigate("PostView", {postUrl: fullUrl})
   }
 
   renderPostRows(posts) {
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.container}>
         <FlatList
         data={posts}
         renderItem={({item}) =>(

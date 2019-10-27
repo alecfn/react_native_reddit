@@ -2,10 +2,14 @@ import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from "react-navigation-stack";
+import { commonStyles } from './screens/Styles'
 
 import MainFeed from './screens/MainFeed';
 import PostView from "./screens/PostView";
 
+/**
+ * Main page of the App. WIP.
+ */
 class App extends React.Component {
   static navigationOptions = {
     title: "Home",
@@ -23,7 +27,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={commonStyles.container}>
         <Button
           onPress={this._goToMainFeed}
           title="Go to Main Feed"
@@ -32,15 +36,6 @@ class App extends React.Component {
       );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 const AppNavigator = createStackNavigator({
   Home: {screen: App},
