@@ -25,7 +25,7 @@ export default class PostView extends Component {
     try {
       let response = await fetch(postUrlJsonEndpoint);
       this.setState({
-        postJson: JSON.stringify(response.json()),
+        postJson: response.json(),
         isLoaded: true
       })
     } catch(err) {
@@ -42,7 +42,7 @@ export default class PostView extends Component {
       return <Text>Loading post...</Text>
     }
     else {
-      console.log(postJson)
+      
       return (
         <Text>{postUrl}</Text>
       );
