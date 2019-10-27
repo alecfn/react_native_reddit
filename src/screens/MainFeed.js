@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, FlatList, StyleSheet,
          TouchableHighlight } from 'react-native';
+import { commonStyles } from './Styles'
 
 export default class MainFeed extends Component {
 
@@ -13,7 +14,7 @@ export default class MainFeed extends Component {
   }
 
   // For now, just grab the front page JSON so it can be put into views.
-  componentDidMount() { // todo willMount? await?
+  componentDidMount() { 
     fetch("https://www.reddit.com/.json")
       .then(res => res.json())
       .then(json => {
@@ -26,7 +27,7 @@ export default class MainFeed extends Component {
 
   _goToPost(url) {
     // Super props
-    let fullUrl = "www.reddit.com" + url
+    const fullUrl = "www.reddit.com" + url
     console.log(fullUrl)
     this.props.navigation.navigate("PostView", {postUrl: fullUrl})
   }
@@ -79,10 +80,6 @@ export default class MainFeed extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
   item: {
     padding: 10,
     fontSize: 18,
