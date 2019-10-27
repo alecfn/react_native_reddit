@@ -5,12 +5,15 @@ export default class PostView extends Component {
 
   constructor(props) {
     super(props);
-    //this.state = {
-    //  url: = "",
-    //}
+    // As the url of the page is passed through, get these props
+    this.navigate = this.props.navigation.navigate;
+    this.params = this.props.navigation.state.params;
   }
 
-    render() {
-      <Text>load it up</Text>
-    }
+  render() {
+    const postUrl = this.props.navigation.state.params.postUrl
+    return (
+      <Text>{postUrl}</Text>
+    );
+  }
 }

@@ -4,6 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from "react-navigation-stack";
 
 import MainFeed from './screens/MainFeed';
+import PostView from "./screens/PostView";
 
 class App extends React.Component {
   static navigationOptions = {
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
 
 const AppNavigator = createStackNavigator({
   Home: {screen: App},
-  MainFeed: {screen: MainFeed}
+  MainFeed: {screen: MainFeed},
+  PostView: {screen: PostView}
 });
 
 export default createAppContainer(AppNavigator);

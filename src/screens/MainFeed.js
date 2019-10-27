@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, ScrollView, Image, FlatList, StyleSheet,
          TouchableHighlight } from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from "react-navigation-stack";
-
-import PostView from './PostView';
 
 export default class MainFeed extends Component {
 
@@ -29,9 +25,10 @@ export default class MainFeed extends Component {
   }
 
   _goToPost(url) {
-    console.log(url)
-    console.log("func called")
-    this.props.navigation.navigate("PostView")
+    // Super props
+    let fullUrl = "www.reddit.com" + url
+    console.log(fullUrl)
+    this.props.navigation.navigate("PostView", {postUrl: fullUrl})
   }
 
   renderPostRows(posts) {
@@ -41,7 +38,8 @@ export default class MainFeed extends Component {
         data={posts}
         renderItem={({item}) =>(
           <TouchableHighlight
-          onPress={this._goToPost(item.permalink)}
+          // onPress must be bound with () or it will call on render multiple times
+          onPress={() => this._goToPost(item.permalink)} 
           underlayColor="white" >
             <View style={{flexDirection: 'row', alignContext:'stretch'}}>
                   <Text style={styles.postText}>
