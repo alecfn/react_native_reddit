@@ -48,7 +48,7 @@ export default class MainFeed extends Component {
           onPress={() => this._goToPost(item.permalink)} 
           underlayColor="white" >
             <View style={{flexDirection: 'row', alignContext:'stretch'}}>
-                  <Text style={styles.postText}>
+                  <Text style={commonStyles.postText}>
                     {item.title}
                   </Text>
                   <Image
@@ -89,13 +89,5 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
-  },
-  postText: {
-    paddingLeft: 10,
-    width: 100,
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
   }
 })
